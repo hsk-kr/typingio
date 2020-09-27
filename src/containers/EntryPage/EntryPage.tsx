@@ -1,7 +1,14 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import classNames from 'classnames/bind';
 import { SocketContext } from 'context/SocketContext';
-import { connect } from 'socket.io-client';
+
+// Components
+import InputBox from 'components/InputBox';
+import Button from 'components/Button';
+
+import styles from './EntryPage.module.scss';
+const cx = classNames.bind(styles);
 
 const EntryPage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -42,17 +49,19 @@ const EntryPage: React.FC = () => {
   }, [errorMessage]);
 
   return (
-    <div>
-      <h1>EntryPage</h1>
-      Nickname:{' '}
-      <input
-        type="text"
-        value={nickname}
-        onChange={(e) => setNickname(e.target.value)}
-      />
-      <button type="button" onClick={handleEnter}>
-        Enter
-      </button>
+    <div className={cx('container')}>
+      <div className={cx('content')}>
+        <h1 className={cx('title')}>Typing IO</h1>
+        <InputBox
+          width={300}
+          value={nickname}
+          onChange={(value) => setNickname(value)}
+          placeholder="ENTER NICKNAME"
+        />
+        <Button width={300} onClick={handleEnter}>
+          Play Game
+        </Button>
+      </div>
     </div>
   );
 };
