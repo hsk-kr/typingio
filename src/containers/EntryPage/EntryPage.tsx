@@ -39,6 +39,12 @@ const EntryPage: React.FC = () => {
 
     gameClient.connect();
 
+    return () => {
+      gameClient.onConnect = undefined;
+      gameClient.onClose = undefined;
+      gameClient.onError = undefined;
+      gameClient.invokeEvent();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -56,6 +62,7 @@ const EntryPage: React.FC = () => {
           width={300}
           value={nickname}
           onChange={(value) => setNickname(value)}
+          onEnter={handleEnter}
           placeholder="ENTER NICKNAME"
         />
         <Button width={300} onClick={handleEnter}>
