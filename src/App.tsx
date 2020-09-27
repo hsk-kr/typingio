@@ -1,11 +1,12 @@
 import React from 'react';
-import EntryPage from 'containers/EntryPage';
+import { SocketProvider } from 'context/SocketContext';
+import Router from 'router';
 
 function App() {
   return (
-    <div className="App">
-      <EntryPage />
-    </div>
+    <SocketProvider>
+      <Router />
+    </SocketProvider>
   );
 }
 
